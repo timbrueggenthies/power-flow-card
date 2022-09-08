@@ -431,7 +431,7 @@ export class PowerFlowCard extends LitElement {
                   />
                 </svg>
               </div>
-              <span class="label">Amarok</span
+              <span class="label"></span
               >
             </div>
           </div>
