@@ -1,3 +1,10 @@
+## [1.1.0](https://github.com/timbrueggenthies/power-flow-card/compare/v1.0.0...v1.1.0) (2022-09-08)
+
+
+### Features
+
+* **style:** Change icon and name of home ([81c88c8](https://github.com/timbrueggenthies/power-flow-card/commit/81c88c86442e7cea9f57a780ee82ceab4f16bc56))
+
 ## 1.0.0 (2022-09-08)
 
 
