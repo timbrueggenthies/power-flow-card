@@ -471,16 +471,10 @@ export class PowerFlowCard extends LitElement {
                   >
                 </div>
                 ${hasAcConsumption
-                  ? html` <div class="circle-container">
+                  ? html` <div class="circle-container ac-consumption">
                       <div class="circle">
                         <ha-svg-icon .path=${mdiPowerSocketDe}></ha-svg-icon>
-                        <span class="consumption">
-                          <ha-svg-icon
-                            class="small"
-                            .path=${mdiArrowRight}
-                          ></ha-svg-icon
-                          >${this.displayValue(acConsumption)}
-                        </span>
+                        ${this.displayValue(acConsumption)}
                       </div>
                       <span class="label">230V</span>
                     </div>`
@@ -603,21 +597,19 @@ export class PowerFlowCard extends LitElement {
                     d="M50,0 V100"
                     vector-effect="non-scaling-stroke"
                   ></path>
-                  ${solarToBattery
-                    ? svg`<circle
-                            r="1"
-                            class="dc-ac"
-                            vector-effect="non-scaling-stroke"
-                          >
-                            <animateMotion
-                              dur="${newDur.dcToAc}s"
-                              repeatCount="indefinite"
-                              calcMode="linear"
-                            >
-                              <mpath xlink:href="#dc-ac" />
-                            </animateMotion>
-                          </circle>`
-                    : ""}
+                    <circle
+                        r="1"
+                        class="dc-ac"
+                        vector-effect="non-scaling-stroke"
+                      >
+                        <animateMotion
+                          dur="${newDur.dcToAc}s"
+                          repeatCount="indefinite"
+                          calcMode="linear"
+                        >
+                          <mpath xlink:href="#dc-ac" />
+                        </animateMotion>
+                      </circle>
                 </svg>
               </div>`
             : ""}
@@ -780,13 +772,15 @@ export class PowerFlowCard extends LitElement {
       bottom: 100px;
       height: 156px;
     }
+    .lines.dc-ac {
+      justify-content: flex-end;
+      bottom: 100px;
+      height: 40px;
+    }
     .lines svg {
       width: calc(100% - 160px);
       height: 100%;
       max-width: 340px;
-    }
-    .lines.dc-ac {
-      justify-content: flex-end;
     }
     .row {
       display: flex;
@@ -804,6 +798,10 @@ export class PowerFlowCard extends LitElement {
       height: 130px;
     }
     .circle-container.battery {
+      height: 110px;
+      justify-content: flex-end;
+    }
+    .circle-container.ac-consumption {
       height: 110px;
       justify-content: flex-end;
     }
