@@ -9,7 +9,7 @@ import {
   mdiBatteryLow,
   mdiBatteryMedium,
   mdiBatteryOutline,
-  mdiHome,
+  mdiCarPickup,
   mdiSolarPower,
   mdiTransmissionTower,
 } from "@mdi/js";
@@ -372,7 +372,7 @@ export class PowerFlowCard extends LitElement {
               : html`<div class="spacer"></div>`}
             <div class="circle-container home">
               <div class="circle">
-                <ha-svg-icon .path=${mdiHome}></ha-svg-icon>
+                <ha-svg-icon .path=${mdiCarPickup}></ha-svg-icon>
                 ${this.displayValue(totalHomeConsumption)}
                 <svg>
                   ${homeSolarCircumference !== undefined
@@ -425,10 +425,7 @@ export class PowerFlowCard extends LitElement {
                   />
                 </svg>
               </div>
-              <span class="label"
-                >${this.hass.localize(
-                  "ui.panel.lovelace.cards.energy.energy_distribution.home"
-                )}</span
+              <span class="label">Amarok</span
               >
             </div>
           </div>
