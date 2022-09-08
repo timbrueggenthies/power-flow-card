@@ -1,3 +1,10 @@
+### [1.1.1](https://github.com/timbrueggenthies/power-flow-card/compare/v1.1.0...v1.1.1) (2022-09-08)
+
+
+### Performance Improvements
+
+* **entities:** Add new ac consumption circle ([3c59b55](https://github.com/timbrueggenthies/power-flow-card/commit/3c59b55aee01a9325ad8e309f609621c2820e5c6))
+
 ## [1.1.0](https://github.com/timbrueggenthies/power-flow-card/compare/v1.0.0...v1.1.0) (2022-09-08)
 
 
