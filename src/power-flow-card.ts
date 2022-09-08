@@ -12,6 +12,7 @@ import {
   mdiCarPickup,
   mdiSolarPower,
   mdiTransmissionTower,
+  mdiPowerSocketDe
 } from "@mdi/js";
 import { formatNumber, HomeAssistant } from "custom-card-helpers";
 import { css, html, LitElement, svg, TemplateResult } from "lit";
@@ -44,6 +45,7 @@ export class PowerFlowCard extends LitElement {
   @query("#solar-battery-flow") solarToBatteryFlow?: SVGSVGElement;
   @query("#solar-grid-flow") solarToGridFlow?: SVGSVGElement;
   @query("#solar-home-flow") solarToHomeFlow?: SVGSVGElement;
+  @query("#dc-ac-flow") dcAcFlow?: SVGSVGElement;
 
   setConfig(config: PowerFlowCardConfig): void {
     if (
@@ -125,6 +127,7 @@ export class PowerFlowCard extends LitElement {
     const hasGrid = entities.grid !== undefined;
 
     const hasBattery = entities.battery !== undefined;
+    const hasAcConsumption = entities.acConsumption !== undefined;
     const hasSolarProduction = entities.solar !== undefined;
     const hasReturnToGrid =
       hasGrid &&
@@ -239,6 +242,8 @@ export class PowerFlowCard extends LitElement {
       gridConsumption + (solarConsumption ?? 0) + (batteryConsumption ?? 0),
       0
     );
+    const acConsumption = this.getEntityStateWatts(entities.acConsumption);
+    const dcConsumption = totalHomeConsumption - acConsumption;
 
     let homeBatteryCircumference: number | undefined;
     if (batteryConsumption)
@@ -288,6 +293,7 @@ export class PowerFlowCard extends LitElement {
         totalLines
       ),
       batteryToHome: this.circleRate(batteryConsumption ?? 0, totalLines),
+      dcToAc: this.circleRate(acConsumption ?? 0, totalLines),
       gridToHome: this.circleRate(gridConsumption, totalLines),
       solarToBattery: this.circleRate(solarToBattery ?? 0, totalLines),
       solarToGrid: this.circleRate(solarToGrid, totalLines),
@@ -373,7 +379,7 @@ export class PowerFlowCard extends LitElement {
             <div class="circle-container home">
               <div class="circle">
                 <ha-svg-icon .path=${mdiCarPickup}></ha-svg-icon>
-                ${this.displayValue(totalHomeConsumption)}
+                ${this.displayValue(dcConsumption)}
                 <svg>
                   ${homeSolarCircumference !== undefined
                     ? svg`<circle
@@ -464,7 +470,21 @@ export class PowerFlowCard extends LitElement {
                     )}</span
                   >
                 </div>
-                <div class="spacer"></div>
+                ${hasAcConsumption
+                  ? html` <div class="circle-container">
+                      <div class="circle">
+                        <ha-svg-icon .path=${mdiPowerSocketDe}></ha-svg-icon>
+                        <span class="consumption">
+                          <ha-svg-icon
+                            class="small"
+                            .path=${mdiArrowRight}
+                          ></ha-svg-icon
+                          >${this.displayValue(acConsumption)}
+                        </span>
+                      </div>
+                      <span class="label">230V</span>
+                    </div>`
+                  : html`<div class="spacer"></div>`}
               </div>`
             : ""}
           ${hasSolarProduction
@@ -563,6 +583,38 @@ export class PowerFlowCard extends LitElement {
                               calcMode="linear"
                             >
                               <mpath xlink:href="#battery-solar" />
+                            </animateMotion>
+                          </circle>`
+                    : ""}
+                </svg>
+              </div>`
+            : ""}
+          ${hasAcConsumption
+            ? html`<div class="lines dc-ac ${classMap({ battery: hasBattery })}">
+                <svg
+                  viewBox="0 0 100 100"
+                  xmlns="http://www.w3.org/2000/svg"
+                  preserveAspectRatio="xMidYMid slice"
+                  id="dc-ac-flow"
+                >
+                  <path
+                    id="dc-ac"
+                    class="dc-ac"
+                    d="M50,0 V100"
+                    vector-effect="non-scaling-stroke"
+                  ></path>
+                  ${solarToBattery
+                    ? svg`<circle
+                            r="1"
+                            class="dc-ac"
+                            vector-effect="non-scaling-stroke"
+                          >
+                            <animateMotion
+                              dur="${newDur.dcToAc}s"
+                              repeatCount="indefinite"
+                              calcMode="linear"
+                            >
+                              <mpath xlink:href="#dc-ac" />
                             </animateMotion>
                           </circle>`
                     : ""}
@@ -733,6 +785,9 @@ export class PowerFlowCard extends LitElement {
       height: 100%;
       max-width: 340px;
     }
+    .lines.dc-ac {
+      justify-content: flex-end;
+    }
     .row {
       display: flex;
       justify-content: space-between;
@@ -831,6 +886,14 @@ export class PowerFlowCard extends LitElement {
       stroke: var(--energy-battery-in-color);
     }
     circle.battery-solar {
+      stroke-width: 4;
+      fill: var(--energy-battery-in-color);
+    }
+    path.dc-ac,
+    circle.dc-ac {
+      stroke: var(--energy-battery-in-color);
+    }
+    circle.dc-ac {
       stroke-width: 4;
       fill: var(--energy-battery-in-color);
     }
