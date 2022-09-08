@@ -1,3 +1,11 @@
+### [1.2.1](https://github.com/timbrueggenthies/power-flow-card/compare/v1.2.0...v1.2.1) (2022-09-08)
+
+
+### Bug Fixes
+
+* **ui:** Adjust width of line for ac ([80a25b7](https://github.com/timbrueggenthies/power-flow-card/commit/80a25b7cbbb128a559e3db458aebb4e0eca82048))
+* **ui:** Remove Amarok label ([e98176d](https://github.com/timbrueggenthies/power-flow-card/commit/e98176d79fe252d50ee04bc072d7fe749023f75c))
+
 ## [1.2.0](https://github.com/timbrueggenthies/power-flow-card/compare/v1.1.1...v1.2.0) (2022-09-08)
 
 
