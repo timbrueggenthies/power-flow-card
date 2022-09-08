@@ -1,3 +1,10 @@
+### [1.2.2](https://github.com/timbrueggenthies/power-flow-card/compare/v1.2.1...v1.2.2) (2022-09-08)
+
+
+### Bug Fixes
+
+* **ui:** Adjust width of line ([0b57843](https://github.com/timbrueggenthies/power-flow-card/commit/0b57843467a53bf1f3b626f20e0f3f07680a6414))
+
 ### [1.2.1](https://github.com/timbrueggenthies/power-flow-card/compare/v1.2.0...v1.2.1) (2022-09-08)
 
 
