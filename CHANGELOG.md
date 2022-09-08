@@ -1,3 +1,10 @@
+## [1.2.0](https://github.com/timbrueggenthies/power-flow-card/compare/v1.1.1...v1.2.0) (2022-09-08)
+
+
+### Features
+
+* **ui:** Changes ([a69d956](https://github.com/timbrueggenthies/power-flow-card/commit/a69d956d3aabcf94a3d5190663d3ff368f467eea))
+
 ### [1.1.1](https://github.com/timbrueggenthies/power-flow-card/compare/v1.1.0...v1.1.1) (2022-09-08)
 
 
