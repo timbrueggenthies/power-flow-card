@@ -775,7 +775,8 @@ export class PowerFlowCard extends LitElement {
     .lines.dc-ac {
       justify-content: flex-end;
       bottom: 100px;
-      height: 40px;
+      width: 80px;
+      height: 60px;
     }
     .lines svg {
       width: calc(100% - 160px);
